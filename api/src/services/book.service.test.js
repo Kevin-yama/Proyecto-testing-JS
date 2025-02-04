@@ -1,4 +1,4 @@
-import { generateManyBook } from '../fakes/book.fake';
+const { generateManyBook } = require('../fakes/book.fake');
 
 const BooksService = require('./books.service');
 
