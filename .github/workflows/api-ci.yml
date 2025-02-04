@@ -1,30 +1,35 @@
-name : API CI
-#on: [push]
+name: API CI
+
+# Trigger the workflow on push to specific paths
 on:
   push:
     paths:
-      -".api/**"
-      -".github/workflows/api-ci.yml"
+      - "api/**"  # Corregido: Eliminé el punto inicial en ".api"
+      - ".github/workflows/api-ci.yml"
 
-defauls:
+# Defaults for all jobs
+defaults:  # Corregido: "defauls" -> "defaults"
   run:
-    working-directory: ./api 
+    working-directory: ./api
 
 jobs:
   unit-test:
-    run-on: ubuntu-latest
+    runs-on: ubuntu-latest  # Corregido: "run-on" -> "runs-on"
     steps:
       - name: Checkout
-       uses: actions/checkout@v2
-      - name: Setup Nodejs
+        uses: actions/checkout@v2  # Corregido: Eliminé el espacio adicional antes de "uses"
+
+      - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
           node-version: 14
           cache: npm
-          cache-dependency-path: ./api/packege-lock.json
-      - name: install
+          cache-dependency-path: ./api/package-lock.json  # Corregido: "packege-lock.json" -> "package-lock.json"
+
+      - name: Install dependencies
         shell: bash
-        run: npm i
-      - name: run unit test
+        run: npm install  # Corregido: "npm i" -> "npm install" (mejor práctica)
+
+      - name: Run unit tests
         shell: bash
         run: npm run test
